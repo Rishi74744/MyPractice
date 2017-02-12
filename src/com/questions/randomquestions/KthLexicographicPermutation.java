@@ -1,5 +1,7 @@
 package com.questions.randomquestions;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class KthLexicographicPermutation {
@@ -17,17 +19,19 @@ public class KthLexicographicPermutation {
 		}
 		
 		permuteString("", missingString.toString());
-		System.out.println("Output :"+finalOutput);
+		System.out.println("Output :"+l1.get(k-1));
 	}
 	static int k;
 	static int j = 0;
 	static String finalOutput;
+	static List<String> l1 = new ArrayList<>();
 	
 
 
 		  public static void permuteString(String beginningString, String endingString) {
 		    if (j>k){
 		    	finalOutput = beginningString + endingString;
+		    	l1.add(finalOutput);
 		    	System.out.println(finalOutput);
 		    }
 		    else{
