@@ -1,7 +1,5 @@
 package com.questions.hackerrank;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 public class HackerrankInAString {
@@ -10,19 +8,34 @@ public class HackerrankInAString {
 		Scanner sc = new Scanner(System.in);
 		int q = sc.nextInt();
 		String reqSubstring = "hackerrank";
+		char hackarr[] = reqSubstring.toCharArray();
 		for (int w = 0; w < q; w++) {
 			String s = sc.next();
-			int n = s.length();
-			Map<String,Integer> m1 = new HashMap<>();
-			while (n != 0) {
-				if(m1.containsKey(Character.toString(s.charAt(n)))){
-					int val = m1.get(Character.toString(s.charAt(n))) + 1;
-					m1.put(Character.toString(s.charAt(n)), val);
-				}else{
-					m1.put(Character.toString(s.charAt(n)), 1);
-				}
+			boolean hack[] = new boolean[10];
+			for (int i = 0; i < 10; i++) {
+				hack[i] = false;
 			}
-			
+			char ar[] = s.toCharArray();
+			int c = 0, i = 0;
+			boolean isAll = false;
+			while (c != ar.length) {
+				if (ar[c] == hackarr[i]) {
+					hack[i] = true;
+					if (i == 9) {
+						isAll = true;
+					}
+					i++;
+					if (i == 10) {
+						break;
+					}
+				}
+				c++;
+			}
+			if (isAll) {
+				System.out.println("YES");
+			} else {
+				System.out.println("NO");
+			}
 		}
 	}
 
