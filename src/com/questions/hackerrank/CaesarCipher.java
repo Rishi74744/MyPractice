@@ -12,17 +12,19 @@ public class CaesarCipher {
 		int num = 26;
 		StringBuilder finalString = new StringBuilder();
 		for (int i = 0; i < s.length(); i++) {
-			
-			if (((char) s.charAt(i) >= 65 && (char) s.charAt(i) <= 90) || (char) s.charAt(i) >= 97 && (char) s.charAt(i) <= 122) {
+
+			if (((char) s.charAt(i) >= 65 && (char) s.charAt(i) <= 90)
+					|| (char) s.charAt(i) >= 97 && (char) s.charAt(i) <= 122) {
 				int p = (char) s.charAt(i) + (k % num);
+				int ls = (char) s.charAt(i);
 				if ((char) s.charAt(i) < 91 && p > 90) {
 					int x = 0;
-					x = p - 90;						
+					x = p - 90;
 					p = 64 + x;
 				} else if ((char) s.charAt(i) < 123 && p > 122) {
 					int x = 0;
-					x = p - 122;						
-					p = 97 + x;
+					x = p - 122;
+					p = 96 + x;
 				}
 				finalString.append((char) p);
 			} else {
