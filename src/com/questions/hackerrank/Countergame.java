@@ -13,7 +13,7 @@ public class Countergame {
 			String b = n.toString(2);
 			int c = 0;
 			int numOfOnes = 0;
-			while(c != b.length()){
+			while (c != b.length()) {
 				if (Character.toString(b.charAt(c)).equals("1")) {
 					numOfOnes++;
 				}
@@ -21,18 +21,18 @@ public class Countergame {
 			}
 			c--;
 			int numOfTrailingZeros = 0;
-			while(c!=0){
+			while (c != 0) {
 				if (Character.toString(b.charAt(c)).equals("0")) {
 					numOfTrailingZeros++;
-				}else{
+				} else {
 					break;
 				}
 				c--;
 			}
 			int totalMoves = numOfOnes + numOfTrailingZeros - 1;
-			if(totalMoves % 2 == 0){
+			if (totalMoves % 2 == 0) {
 				System.out.println("Richard");
-			}else{
+			} else {
 				System.out.println("Louise");
 			}
 		}
@@ -40,6 +40,6 @@ public class Countergame {
 
 }
 
-
 /**
-TestCase - 9034272882268244365 - Richard*/
+ * TestCase - 9034272882268244365 - Richard
+ */
