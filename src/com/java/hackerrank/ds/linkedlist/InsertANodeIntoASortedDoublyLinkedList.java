@@ -54,7 +54,35 @@ public class InsertANodeIntoASortedDoublyLinkedList {
 	}
 
 	static DoublyLinkedListNode sortedInsert(DoublyLinkedListNode head, int data) {
-		return null;
+		DoublyLinkedListNode node = new DoublyLinkedListNode(data);
+		if (head == null) {
+			return node;
+		}
+		if (head.next == null) {
+			if (head.data > data) {
+				node.next = head;
+				head.prev = node;
+				return node;
+			} else {
+				head.next = node;
+				node.prev = head;
+				return node;
+
+			}
+		}
+		DoublyLinkedListNode current = head;
+		while (current.next != null) {
+			if (current.data <= data) {
+				current = current.next;
+			} else {
+				if (current.next.data > data) {
+					current.next = node;
+					node.prev = current;
+					current.next.prev = node;
+				}
+			}
+		}
+		return head;
 
 	}
 

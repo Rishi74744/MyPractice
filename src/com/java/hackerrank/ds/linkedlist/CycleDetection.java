@@ -1,7 +1,6 @@
 package com.java.hackerrank.ds.linkedlist;
 
 import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -57,17 +56,20 @@ public class CycleDetection {
 			return false;
 		}
 		SinglyLinkedListNode current = head;
-		SinglyLinkedListNode aheadTwo = current.next;
+		SinglyLinkedListNode aheadTwo = head.next.next;
 		if (current == aheadTwo) {
 			return true;
 		}
 		boolean isCycle = false;
-		while (current.next != null) {
+		while (current.next != null && aheadTwo != null) {
 			if (current == aheadTwo) {
 				isCycle = true;
 				break;
 			}
 			current = current.next;
+			if (current.next == null) {
+				break;
+			}
 			aheadTwo = current.next.next;
 		}
 

@@ -1,15 +1,21 @@
-package com.algorithms;
+package com.java.hackerrank.sorting;
 
-public class InsertionSort {
+public class InsertionSortAdvancedAnalysis {
 
 	public static void sort(int arr[]) {
 		int swaps = 0;
 		for (int i = 1; i < arr.length; i++) {
 			int key = arr[i];
 			int j = i - 1;
-			for (; j >= 0 && arr[j] > key; j--) {
-				arr[j + 1] = arr[j];
-				swaps++;
+			int m = 0;
+			int currentvalue = arr[j];
+			while (m < j) {
+				if (arr[j] > key) {
+					j--;
+				}
+				if (arr[m] < key) {
+					m++;
+				}
 			}
 			arr[j + 1] = key;
 		}
@@ -23,5 +29,4 @@ public class InsertionSort {
 			System.out.println(arr[i]);
 		}
 	}
-
 }

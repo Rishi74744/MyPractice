@@ -9,18 +9,18 @@ public class BreadthFirstSearch {
 	public static Queue<Integer> queue = new PriorityQueue<>();
 
 	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
+		Scanner scanner = new Scanner(System.in);
 		System.out.println("Enter the number of nodes in graph :");
-		int n = sc.nextInt();
+		int n = scanner.nextInt();
 		int arr[][] = new int[n][n];
 		System.out.println("Enter the graph matrix");
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < n; j++) {
-				arr[i][j] = sc.nextInt();
+				arr[i][j] = scanner.nextInt();
 			}
 		}
 		System.out.println("Enter the start node");
-		int start = sc.nextInt();
+		int start = scanner.nextInt();
 		queue.add(start - 1);
 		boolean isVisited[] = new boolean[n];
 		for (int i = 0; i < n; i++) {
@@ -36,6 +36,7 @@ public class BreadthFirstSearch {
 				}
 			}
 		}
+		scanner.close();
 	}
 
 }

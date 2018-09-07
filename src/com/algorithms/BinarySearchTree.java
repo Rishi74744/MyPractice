@@ -2,7 +2,7 @@ package com.algorithms;
 
 import java.util.Scanner;
 
-class BST{
+class BST {
 	BST leftSubTree;
 	BST rightSubTree;
 	int value;
@@ -10,39 +10,39 @@ class BST{
 
 public class BinarySearchTree {
 	public static void main(String[] args) {
+		System.out.println("Enter BST size  : ");
 		Scanner sc = new Scanner(System.in);
 		int n = sc.nextInt();
 		int arr[] = new int[n];
 		BST b = new BST();
-		for(int i = 0; i < n; i++){
+		for (int i = 0; i < n; i++) {
 			arr[i] = sc.nextInt();
-			if(b.leftSubTree == null && b.rightSubTree == null){
+			if (b.leftSubTree == null && b.rightSubTree == null) {
 				b.value = arr[i];
-			}else{
+			} else {
 				placeElementInBST(b, arr[i]);
 			}
 		}
-		
 	}
-	
-	public static void placeElementInBST(BST b, int value){
-		if(b.value <= value){
-			if(b.leftSubTree == null){
+
+	public static void placeElementInBST(BST b, int value) {
+		if (b.value <= value) {
+			if (b.leftSubTree == null) {
 				BST bst = new BST();
 				bst.value = value;
 				b.leftSubTree = bst;
-			}else{
+			} else {
 				placeElementInBST(b.leftSubTree, value);
 			}
-		}else{
-			if(b.rightSubTree == null){
+		} else {
+			if (b.rightSubTree == null) {
 				BST bst = new BST();
 				bst.value = value;
 				b.rightSubTree = bst;
-			}else{
+			} else {
 				placeElementInBST(b.rightSubTree, value);
 			}
 		}
 	}
-	
+
 }
