@@ -44,7 +44,7 @@ public class RobotInAGrid {
 		for (int i = 0; i < row; i++) {
 			for (int j = 0; j < col; j++) {
 				if (arr[i][j] == 2) {
-					System.out.println(i + " ," + j);
+					System.out.println(i + "," + j);
 				}
 			}
 		}

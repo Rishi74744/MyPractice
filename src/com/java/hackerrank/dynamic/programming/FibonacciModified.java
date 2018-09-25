@@ -1,46 +1,51 @@
 package com.java.hackerrank.dynamic.programming;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.math.BigInteger;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class FibonacciModified {
 
-	// Complete the fibonacciModified function below.
-	static int fibonacciModified(int t1, int t2, int n) {
-		/*
-		 * for(BigInteger b = BigInteger.ZERO; b.add(BigInteger.ONE)) {
-		 * 
-		 * }
-		 */
-		return 0;
+	static Map<BigInteger, BigInteger> m = new HashMap<>();
+
+	static BigInteger fibonacciModified(int t1, int t2, int n) {
+		m.put(BigInteger.ZERO, new BigInteger(Integer.toString(t1)));
+		m.put(BigInteger.ONE, new BigInteger(Integer.toString(t2)));
+		return fib(n - 1);
+	}
+
+	static BigInteger fib(int n) {
+		if (n == 0 || n == 1) {
+			return m.get(new BigInteger(Integer.toString(n)));
+		}
+		if (!m.containsKey(n)) {
+			BigInteger t1 = fib(n - 2);
+			BigInteger t2 = fib(n - 1).pow(2);
+			BigInteger sum = t1.add(t2);
+			m.put(new BigInteger(Integer.toString(n)), sum);
+		}
+		return m.get(new BigInteger(Integer.toString(n)));
 	}
 
 	private static final Scanner scanner = new Scanner(System.in);
 
 	public static void main(String[] args) throws IOException {
-		/*BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+		/*
+		 * String[] t1T2n = scanner.nextLine().split(" ");
+		 * 
+		 * int t1 = Integer.parseInt(t1T2n[0]);
+		 * 
+		 * int t2 = Integer.parseInt(t1T2n[1]);
+		 * 
+		 * int n = Integer.parseInt(t1T2n[2]);
+		 */
 
-		String[] t1T2n = scanner.nextLine().split(" ");
+		BigInteger result = fibonacciModified(0, 1, 10);
+		System.out.println("Result : " + result);
 
-		int t1 = Integer.parseInt(t1T2n[0]);
-
-		int t2 = Integer.parseInt(t1T2n[1]);
-
-		int n = Integer.parseInt(t1T2n[2]);
-
-		int result = fibonacciModified(t1, t2, n);
-
-		bufferedWriter.write(String.valueOf(result));
-		bufferedWriter.newLine();
-
-		bufferedWriter.close();
-
-		scanner.close();*/
-		String s = "assddasfdf";
-		System.out.println((int)s.charAt(0) - 96);
+		scanner.close();
 	}
 
 }

@@ -1,51 +1,63 @@
 package com.algorithms;
 
-import java.util.Scanner;
-
 public class QuickSort {
 
-	static void quickSort(int arr[], int p, int q) {
-		if (p == q) {
-			return;
-		} else {
-			int m = partition(arr, p, q);
-			quickSort(arr, p, m - 1);
-			quickSort(arr, m + 1, q);
+	public static void quickSort(int a[], int p, int q) {
+		if (p < q) {
+			int mid = quickPartition(a, p, q);
+			quickSort(a, p, mid - 1);
+			quickSort(a, mid + 1, q);
 		}
 	}
 
-	static int partition(int arr[], int p, int q) {
-		int x = arr[p];
-		int j = p;
-		for (int i = p + 1; i < q; i++) {
-			if (arr[i] <= x) {
-				j = j + 1;
-				int temp = arr[j];
-				arr[j] = arr[i];
-				arr[i] = temp;
+	void sort(int arr[], int low, int high) {
+		if (low < high) {
+			int pi = partition(arr, low, high);
+			sort(arr, low, pi - 1);
+			sort(arr, pi + 1, high);
+		}
+	}
+
+	int partition(int arr[], int low, int high) {
+		int pivot = arr[high];
+		int i = (low - 1);
+		for (int j = low; j < high; j++) {
+			if (arr[j] <= pivot) {
+				i++;
+				int temp = arr[i];
+				arr[i] = arr[j];
+				arr[j] = temp;
 			}
 		}
-		int temp = arr[j];
-		arr[j] = arr[p];
-		arr[p] = temp;
-		return j;
+		int temp = arr[i + 1];
+		arr[i + 1] = arr[high];
+		arr[high] = temp;
+		return i + 1;
+	}
+
+	public static int quickPartition(int arr[], int low, int high) {
+		int pivot = arr[high];
+		int i = low - 1;
+		for (int j = low; j < high; j++) {
+			if (arr[j] <= pivot) {
+				i++;
+				int temp = arr[i];
+				arr[i] = arr[j];
+				arr[j] = temp;
+			}
+		}
+		int temp = arr[i + 1];
+		arr[i + 1] = arr[high];
+		arr[high] = temp;
+		return i + 1;
 	}
 
 	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
-		System.out.println("Enter the array size : ");
-		int arrSize = scanner.nextInt();
-		System.out.println("Enter array elements : ");
-		int arr[] = new int[arrSize];
-		for (int i = 0; i < arrSize; i++) {
-			arr[i] = scanner.nextInt();
+		int a[] = { 12, 43, 23, 6, 145, 78, 94, 56, 648 };
+		quickSort(a, 0, a.length - 1);
+		for (int i = 0; i < a.length; i++) {
+			System.out.print(a[i] + " ");
 		}
-		quickSort(arr, 0, arrSize);
-		System.out.println("Array after sorting");
-		for (int i = 0; i < arrSize; i++) {
-			System.out.println(arr[i]);
-		}
-		scanner.close();
 	}
 
 }

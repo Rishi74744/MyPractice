@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class ArraysDS {
+
 	static int[] reverseArray(int[] a) {
 		int[] arr = new int[a.length];
 		for (int i = a.length - 1, j = 0; i >= 0; i--, j++) {
