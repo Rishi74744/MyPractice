@@ -1,30 +1,57 @@
 package com.java.hackerrank.ds.arrays;
 
 import java.io.IOException;
-import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class ArrayManipulation {
-
+	
 	static long arrayManipulation(int n, int[][] queries) {
-		long arr[] = new long[n];
+		Map<Long, Long>	map = new HashMap<>();
+		for(int i = 0; i < queries.length; i++) {
+			
+		}
+		return 0;
+	}
+	
+
+	/*static long arrayManipulation(int n, int[][] queries) {
+		BigInteger arr[] = new BigInteger[n];
+		Arrays.fill(arr, BigInteger.ZERO);
 		for (int i = 0; i < queries.length; i++) {
-			int a = queries[i][0] - 1;
-			int b = queries[i][1] - 1;
-			int k = queries[i][2];
-			while (a <= b) {
-				arr[a] = arr[a] + k;
-				if (a != b) {
-					arr[b] = arr[b] + k;
-				}
-				a++;
-				b--;
+			BigInteger k = new BigInteger(queries[i][2] + "");
+			for (int j = queries[i][0] - 1; j < queries[i][1] - 1; j++) {
+				arr[j] = arr[j].add(k);
 			}
 		}
-		return Arrays.stream(arr).max().getAsLong();
-		//return arr[arr.length - 1];
-	}
-
+		Optional<BigInteger> max = Arrays.stream(arr).max(new Comparator<BigInteger>() {
+			@Override
+			public int compare(BigInteger o1, BigInteger o2) {
+				return o1.compareTo(o2);
+			}
+		});
+		return max.get().longValue();
+	}*/
+	
+	/* static long arrayManipulation(int n, int[][] queries) {
+	        long arr[] = new long[n];
+			for (int i = 0; i < queries.length; i++) {
+				int a = queries[i][0] - 1;
+				int b = queries[i][1] - 1;
+				int k = queries[i][2];
+				while (a <= b) {
+					arr[a] = arr[a] + k;
+					if (a != b) {
+						arr[b] = arr[b] + k;
+					}
+					a++;
+					b--;
+				}
+			}
+			return Arrays.stream(arr).max().getAsLong();
+	    }
+*/
 	private static final Scanner scanner = new Scanner(System.in);
 
 	public static void main(String[] args) throws IOException {
