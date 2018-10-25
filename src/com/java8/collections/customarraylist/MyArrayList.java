@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Objects;
 
-import com.sun.xml.internal.txw2.IllegalAnnotationException;
-
 public class MyArrayList<E> extends AbstractList<E> implements List<E>, Cloneable {
 
 	private static final int DEFAULT_CAPACITY = 10;
@@ -30,7 +28,7 @@ public class MyArrayList<E> extends AbstractList<E> implements List<E>, Cloneabl
 		} else if (initialCapacity == 0) {
 			this.elementData = EMPTY_ELEMENTDATA;
 		} else {
-			throw new IllegalAnnotationException("Invalid Initial Capacity");
+			throw new IllegalArgumentException("Invalid Initial Capacity");
 		}
 	}
 

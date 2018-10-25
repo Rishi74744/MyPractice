@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-import com.sun.jndi.ldap.EntryChangeResponseControl;
-
 public class GridlandMetro {
 
 	// Complete the gridlandMetro function below.

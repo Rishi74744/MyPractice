@@ -1,27 +1,22 @@
 package com.java.hackerrank.implementation;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class PickingNumbers {
 
-	// Complete the pickingNumbers function below.
 	static int pickingNumbers(int[] a) {
 		int max = 1;
-		int currCount = 1;
+		Arrays.sort(a);
+		List<Integer> list = new ArrayList<>();
+		List<List<Integer>> ll = new ArrayList<>();
 		for (int i = 0; i < a.length; i++) {
-			for (int j = 1; j < a.length; j++) {
-				if (i != a.length - 1) {
-					if (a[i] - a[i + 1] <= 1) {
-						currCount++;
-						if (currCount > max) {
-							max = currCount;
-						}
-					} else {
-						currCount = 1;
-					}
-				}
-			}
+			
 		}
 		return max;
 	}
@@ -56,3 +51,12 @@ public class PickingNumbers {
 	}
 
 }
+
+/**
+ * 
+ * 
+ * for (int i = 0; i < a.length; i++) { int currCount = 1; for (int j = 0; j <
+ * a.length; j++) { if (i != j && (i != a.length - 1)) { if (Math.abs(a[i] - a[i
+ * + 1]) <= 1) { currCount++; if (currCount > max) { max = currCount; } } else {
+ * currCount = 1; } } } }
+ */
