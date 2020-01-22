@@ -1,25 +1,36 @@
 package com.java.hackerrank.implementation;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
 public class AppendAndDelete {
 
-	// Complete the appendAndDelete function below.
 	static String appendAndDelete(String s, String t, int k) {
-		String s1[] = s.split("");
-		String t1[] = t.split("");
-		for (int i = 0, j = 0; i < s1.length; i++, j++) {
+		char s1[] = s.toCharArray();
+		char t1[] = t.toCharArray();
+		if (s.equals(t)) {
+			return "Yes";
 		}
-		return "";
+		int lenDiff = Math.abs(s.length() - t.length());
+		if (lenDiff > k) {
+			return "No";
+		}
+		int totalSteps = 0;
+		for (int i = 0; i < t1.length && i < s1.length; i++) {
+			if (s1[i] != t1[i]) {
+				totalSteps = t1.length - i + (s1.length - i);
+				break;
+			}
+		}
+		if (totalSteps == k || lenDiff * 2 == k) {
+			return "Yes";
+		}
+		return "No";
 	}
 
 	private static final Scanner scanner = new Scanner(System.in);
 
 	public static void main(String[] args) throws IOException {
-		BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
 
 		String s = scanner.nextLine();
 
@@ -30,11 +41,7 @@ public class AppendAndDelete {
 
 		String result = appendAndDelete(s, t, k);
 
-		bufferedWriter.write(result);
-		bufferedWriter.newLine();
-
-		bufferedWriter.close();
-
+		System.out.println(result);
 		scanner.close();
 	}
 

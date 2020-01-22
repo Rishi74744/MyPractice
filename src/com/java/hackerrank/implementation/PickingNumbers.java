@@ -3,9 +3,7 @@ package com.java.hackerrank.implementation;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 public class PickingNumbers {
@@ -16,7 +14,7 @@ public class PickingNumbers {
 		List<Integer> list = new ArrayList<>();
 		List<List<Integer>> ll = new ArrayList<>();
 		for (int i = 0; i < a.length; i++) {
-			
+
 		}
 		return max;
 	}
