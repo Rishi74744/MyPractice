@@ -6,26 +6,36 @@ import java.util.Scanner;
 public class AppendAndDelete {
 
 	static String appendAndDelete(String s, String t, int k) {
-		char s1[] = s.toCharArray();
-		char t1[] = t.toCharArray();
+		boolean isSame = true;
+		int i = 0;
 		if (s.equals(t)) {
-			return "Yes";
+			if (k >= (s.length() * 2)) {
+				return "Yes";
+			} else {
+				if (k % 2 == 0) {
+					return "Yes";
+				} else {
+					return "No";
+				}
+			}
 		}
-		int lenDiff = Math.abs(s.length() - t.length());
-		if (lenDiff > k) {
-			return "No";
-		}
-		int totalSteps = 0;
-		for (int i = 0; i < t1.length && i < s1.length; i++) {
-			if (s1[i] != t1[i]) {
-				totalSteps = t1.length - i + (s1.length - i);
+		while (isSame) {
+			if (s.charAt(i) != t.charAt(i)) {
+				isSame = false;
+			}
+			i++;
+			if (i == s.length() || i == t.length()) {
 				break;
 			}
 		}
-		if (totalSteps == k || lenDiff * 2 == k) {
+		int total = (s.length() - i + 1) + (t.length() - i + 1);
+		if (total == k) {
 			return "Yes";
+		} else if (total > k) {
+			return Math.abs(total - k) % 2 == 0 ? "Yes" : "No";
+		} else {
+			return "No";
 		}
-		return "No";
 	}
 
 	private static final Scanner scanner = new Scanner(System.in);

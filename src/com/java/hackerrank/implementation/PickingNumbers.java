@@ -2,19 +2,24 @@ package com.java.hackerrank.implementation;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
 public class PickingNumbers {
 
-	static int pickingNumbers(int[] a) {
-		int max = 1;
-		Arrays.sort(a);
-		List<Integer> list = new ArrayList<>();
-		List<List<Integer>> ll = new ArrayList<>();
-		for (int i = 0; i < a.length; i++) {
-
+	static int pickingNumbers(List<Integer> a) {
+		int max = 0;
+		int count[] = new int[101];
+		for (int i = 0; i < a.size(); i++) {
+			int number = a.get(i);
+			int tot = count[number] + 1;
+			count[number] = tot;
+		}
+		for (int i = 0; i < count.length - 1; i++) {
+			int sum = count[i] + count[i + 1];
+			if (sum > max) {
+				max = sum;
+			}
 		}
 		return max;
 	}
@@ -28,14 +33,14 @@ public class PickingNumbers {
 		int n = scanner.nextInt();
 		scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
-		int[] a = new int[n];
+		List<Integer> a = new ArrayList<>();
 
 		String[] aItems = scanner.nextLine().split(" ");
 		scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
 		for (int i = 0; i < n; i++) {
 			int aItem = Integer.parseInt(aItems[i]);
-			a[i] = aItem;
+			a.add(aItem);
 		}
 
 		int result = pickingNumbers(a);
