@@ -1,5 +1,6 @@
 package com.java8.streams.udemy;
 
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Map;
 import java.util.Optional;
@@ -22,5 +23,7 @@ public class StreamMapReduceExample {
 				StudentDatabase.getAllStudents().stream() .collect(Collectors.partitioningBy(s -> s.getGpa() >= 3.8)));
 
 	}
+	
+	Collections
 
 }
