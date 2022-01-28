@@ -35,6 +35,6 @@ public class ZigZagConversion {
 
 	public static void main(String[] args) {
 		ZigZagConversion z = new ZigZagConversion();
-		System.out.println(z.convert("A", 2));
+		System.out.println(z.convert("PAYPAL", 2));
 	}
 }

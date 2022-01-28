@@ -11,6 +11,7 @@ public class BubbleSort {
 					a[j + 1] = temp;
 				}
 			}
+			System.out.println();
 		}
 	}
 

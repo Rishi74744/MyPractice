@@ -20,10 +20,8 @@ public class StreamMapReduceExample {
 				Collectors.collectingAndThen(Collectors.maxBy(Comparator.comparing(Student::getGpa)), Optional::get))));
 
 		System.out.println(
-				StudentDatabase.getAllStudents().stream() .collect(Collectors.partitioningBy(s -> s.getGpa() >= 3.8)));
+				StudentDatabase.getAllStudents().stream().collect(Collectors.partitioningBy(s -> s.getGpa() >= 3.8)));
 
 	}
-	
-	Collections
 
 }

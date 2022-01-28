@@ -1,6 +1,6 @@
 package com.questions.leetcode.amazon.prep;
 
-import com.questions.leetcode.amazon.prep.AddTwoNumbers.ListNode;
+import java.util.Stack;
 
 public class AddTwoNumbersII {
 
@@ -31,52 +31,59 @@ public class AddTwoNumbersII {
 		if (l2 == null) {
 			return l1;
 		}
-		ListNode num1 = null;
-		ListNode num2 = null;
-		ListNode sum = null;
-		ListNode prev = null;
+		Stack<Integer> stack1 = new Stack<>();
+		Stack<Integer> stack2 = new Stack<>();
+		while (l1 != null) {
+			stack1.push(l1.val);
+			l1 = l1.next;
+		}
+		while (l2 != null) {
+			stack2.push(l2.val);
+			l2 = l2.next;
+		}
 		int carry = 0;
-		while (true) {
-			num1 = l1;
-			num2 = l2;
-			ListNode prev1 = null;
-			while (num1.next != null) {
-				prev1 = num1;
-				num1 = num1.next;
-			}
-			ListNode prev2 = null;
-			while (num2.next != null) {
-				prev2 = num2;
-				num2 = num2.next;
-			}
-			if (prev1 != null) {
-				prev1.next = null;
-			}
-			if (prev2 != null) {
-				prev2.next = null;
-			}
-			int val = 0;
-			if (num1 != null && num2 != null) {
-				val = num1.val + num2.val + carry;
-			} else if (num2 == null && num1 != null) {
-				val = num1.val + carry;
-			} else if (num1 == null && num2 != null) {
-				val = num2.val + carry;
-			}
-			if (val >= 10) {
-				val = 10 - val;
+		ListNode sum = null;
+		while (!stack1.isEmpty() && !stack2.empty()) {
+			int val = stack1.pop() + stack2.pop() + carry;
+			if (val > 9) {
+				val = val - 10;
 				carry = 1;
+			} else {
+				carry = 0;
 			}
 			ListNode currentNode = new ListNode(val);
-			if (sum == null) {
-				currentNode.next = null;
-			} else {
-				currentNode.next = sum;
-			}
+			currentNode.next = sum;
 			sum = currentNode;
-			if (num1 == null && num2 == null) {
-				break;
+		}
+		while (!stack1.isEmpty()) {
+			int val = stack1.pop() + carry;
+			if (val > 9) {
+				val = val - 10;
+				carry = 1;
+			} else {
+				carry = 0;
 			}
+			ListNode currentNode = new ListNode(val);
+			currentNode.next = sum;
+			sum = currentNode;
+		}
+
+		while (!stack2.isEmpty()) {
+			int val = stack2.pop() + carry;
+			if (val > 9) {
+				val = val - 10;
+				carry = 1;
+			} else {
+				carry = 0;
+			}
+			ListNode currentNode = new ListNode(val);
+			currentNode.next = sum;
+			sum = currentNode;
+		}
+		if (carry != 0) {
+			ListNode currentNode = new ListNode(carry);
+			currentNode.next = sum;
+			sum = currentNode;
 		}
 		return sum;
 	}
@@ -163,7 +170,7 @@ public class AddTwoNumbersII {
 
 	public static void main(String[] args) {
 		ListNode head1 = null;
-		int num1[] = { 7, 2, 4, 3 };
+		int num1[] = { 5 };
 		ListNode prevNode1 = head1;
 		for (int i = 0; i < num1.length; i++) {
 			if (i == 0) {
@@ -177,7 +184,7 @@ public class AddTwoNumbersII {
 
 		}
 		ListNode head2 = null;
-		int num2[] = { 5, 6, 4 };
+		int num2[] = { 5 };
 		ListNode prevNode2 = head1;
 		for (int i = 0; i < num2.length; i++) {
 			if (i == 0) {
@@ -190,7 +197,7 @@ public class AddTwoNumbersII {
 			}
 		}
 
-		ListNode sum = addTwoNumbersBruteForce(head1, head2);
+		ListNode sum = addTwoNumbers(head1, head2);
 		while (sum != null) {
 			System.out.print(sum.val);
 			sum = sum.next;

@@ -83,4 +83,28 @@ public class IsValidBST {
 		preorder(root.right, preorder);
 	}
 
+	public static boolean isValidBST1(TreeNode root) {
+		List<Integer> preorder = new ArrayList<>();
+		preorder(root, preorder);
+		boolean isValid = true;
+		System.out.print(preorder);
+		for (int i = 1; i < preorder.size(); i++) {
+			if (preorder.get(i) <= preorder.get(i - 1)) {
+				isValid = false;
+				break;
+			}
+		}
+		return isValid;
+	}
+
+	public static boolean validBST(TreeNode root, int left, int right) {
+		if (root == null) {
+			return true;
+		}
+		if (root.val >= left || root.val <= right) {
+			return false;
+		}
+		return validBST(root.left, root.val, right) && validBST(root.right, left, root.val);
+	}
+
 }
