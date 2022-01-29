@@ -9,8 +9,8 @@ import java.util.Map;
 
 public class GroupAnagrams {
 
-	public static List<String> sortByAnagrams(String[] sArr) {
-		List<String> main = new LinkedList<>();
+	public static List<List<String>> sortByAnagrams(String[] sArr) {
+		List<List<String>> main = new LinkedList<>();
 		Map<String, List<String>> anagramMap = new HashMap<>();
 		for (String s : sArr) {
 			char c[] = s.replaceAll(" ", "").toCharArray();
@@ -26,7 +26,7 @@ public class GroupAnagrams {
 			anagramMap.put(sortedKey, anagramList);
 		}
 		for (Map.Entry<String, List<String>> e : anagramMap.entrySet()) {
-			main.addAll(e.getValue());
+			main.add(e.getValue());
 		}
 		return main;
 	}
