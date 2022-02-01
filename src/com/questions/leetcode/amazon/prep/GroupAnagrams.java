@@ -1,21 +1,33 @@
 package com.questions.leetcode.amazon.prep;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 public class GroupAnagrams {
 
 	public List<List<String>> groupAnagrams(String[] sArr) {
-		Map<Map<Character, Integer>, List<String>> anagrams = new HashMap<>();
-		for (int i = 0; i < sArr.length; i++) {
-			Map<Character, Integer> stringCharCount = new HashMap<>();
-			for (char ch : sArr[i].toCharArray()) {
-				stringCharCount.put(ch, stringCharCount.getOrDefault(ch, 0) + 1);
+		List<List<String>> main = new LinkedList<>();
+		Map<String, List<String>> anagramMap = new HashMap<>();
+		for (String s : sArr) {
+			char c[] = s.replaceAll(" ", "").toCharArray();
+			Arrays.sort(c);
+			String sortedKey = new String(c);
+			List<String> anagramList = null;
+			if (anagramMap.containsKey(sortedKey)) {
+				anagramList = anagramMap.get(sortedKey);
+			} else {
+				anagramList = new ArrayList<>();
 			}
-			anagrams.computeIfAbsent(stringCharCount, k -> new ArrayList<>()).add(sArr[i]);
+			anagramList.add(s);
+			anagramMap.put(sortedKey, anagramList);
 		}
-		return new ArrayList<>(anagrams.values());
+		for (Map.Entry<String, List<String>> e : anagramMap.entrySet()) {
+			main.add(e.getValue());
+		}
+		return main;
 	}
 }
