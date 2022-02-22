@@ -13,7 +13,7 @@ public class StreamsExample {
 		Map<String, List<String>> studentActivities = StudentDatabase.getAllStudents().stream()
 				.filter(student -> student.getGradeLevel() >= 3).filter(student -> student.getGpa() >= 3.9)
 				.collect(Collectors.toMap(Student::getName, Student::getActivities));
-//		System.out.println(studentActivities);
+		System.out.println(studentActivities);
 		StudentDatabase.getAllStudents().stream().map(Student::getName).collect(Collectors.toList());
 		System.out.println(StudentDatabase.getAllStudents().stream().map(Student::getActivities).flatMap(List::stream)
 				.distinct().sorted().collect(Collectors.toList()));
