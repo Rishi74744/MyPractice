@@ -35,29 +35,13 @@ public class MiddleOfLinkedList {
 	}
 
 	public static ListNode middleNode(ListNode head) {
-		if (head == null) {
-			return null;
+		ListNode current = head;
+		ListNode ahead = head;
+		while (ahead != null && ahead.next != null && ahead.next.next != null) {
+			current = current.next;
+			ahead = ahead.next.next;
 		}
-		if (head.next == null) {
-			return head;
-		}
-		if (head.next.next == null) {
-			return head.next;
-		}
-		boolean takeSecond = false;
-		ListNode aheadNode = head.next.next;
-		while (aheadNode != null) {
-			head = head.next;
-			if (aheadNode.next != null) {
-				if (aheadNode.next.next == null) {
-					takeSecond = true;
-				}
-				aheadNode = aheadNode.next.next;
-			} else {
-				aheadNode = null;
-			}
-		}
-		return takeSecond ? head.next : head;
+		return current;
 	}
 
 	public static void main(String[] args) {

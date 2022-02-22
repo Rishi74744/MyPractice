@@ -1,20 +1,21 @@
 package com.questions.leetcode.amazon.prep;
 
+import java.util.Arrays;
+
 public class CoinChange {
 
 	public static int coinChange(int[] coins, int amount) {
-		int m[][] = new int[coins.length + 1][amount];
-		
-		for (int i = 0; i < coins.length; i++) {
-			for (int j = 0; j < amount; j++) {
-				if (coins[i] > j) {
-					m[i][j] = m[i - 1][j];
-				} else {
-					m[i][j] = Math.min(m[i - 1][j], 1 + m[i][j - coins[i]]);
+		int dp[] = new int[amount + 1];
+		Arrays.fill(dp, Integer.MAX_VALUE);
+		dp[0] = 0;
+		for (int i = 1; i <= amount; i++) {
+			for (int j = 0; j < coins.length; j++) {
+				if (i - coins[j] >= 0) {
+					dp[i] = Math.min(dp[i], 1 + dp[i - coins[j]]);
 				}
 			}
 		}
-		return m[coins.length - 1][amount - 1];
+		return dp[amount] == Integer.MAX_VALUE ? -1 : dp[amount];
 	}
 
 	public static void main(String[] args) {

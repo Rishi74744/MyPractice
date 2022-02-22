@@ -1,7 +1,9 @@
 package com.questions.leetcode.amazon.prep;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class MostFrequentSubtreeSum {
 
@@ -25,31 +27,36 @@ public class MostFrequentSubtreeSum {
 	}
 
 	Map<Integer, Integer> frequencyCount = new HashMap<>();
+	int maxFreq = 0;
+	int totalWithMaxFreq = 0;
 
 	public int[] findFrequentTreeSum(TreeNode root) {
 		calculateSum(root);
-		return new int[] {};
+		int result[] = new int[totalWithMaxFreq];
+		int idx = 0;
+		for (Map.Entry<Integer, Integer> e : frequencyCount.entrySet()) {
+			if (e.getValue() == maxFreq) {
+				result[idx] = e.getKey();
+				idx++;
+			}
+		}
+		return result;
 	}
 
-	public void calculateSum(TreeNode root) {
+	public int calculateSum(TreeNode root) {
 		if (root == null) {
-			return;
+			return 0;
 		}
-		if (root.left == null && root.right == null) {
-			int count = frequencyCount.getOrDefault(root.val, 0) + 1;
-			frequencyCount.put(root.val, count);
-		} else if (root.left != null && root.right == null) {
-			int count = frequencyCount.getOrDefault(root.val + root.left.val, 0) + 1;
-			frequencyCount.put(root.val + root.left.val, count);
-		} else if (root.left == null && root.right != null) {
-			int count = frequencyCount.getOrDefault(root.val + root.right.val, 0) + 1;
-			frequencyCount.put(root.val + root.right.val, count);
-		} else {
-			int count = frequencyCount.getOrDefault(root.val + root.right.val + root.left.val, 0) + 1;
-			frequencyCount.put(root.val + root.right.val + root.left.val, count);
+		int sum = calculateSum(root.left) + calculateSum(root.right) + root.val;
+		int currentFrequency = frequencyCount.getOrDefault(sum, 0) + 1;
+		frequencyCount.put(sum, currentFrequency);
+		if (currentFrequency == maxFreq) {
+			totalWithMaxFreq++;
+		} else if (currentFrequency > maxFreq) {
+			maxFreq = currentFrequency;
+			totalWithMaxFreq = 1;
 		}
-		calculateSum(root.left);
-		calculateSum(root.right);
+		return sum;
 	}
 
 }

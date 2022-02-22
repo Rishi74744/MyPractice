@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class GroupAnagrams {
 
-	public List<List<String>> groupAnagrams(String[] sArr) {
+	public static List<List<String>> groupAnagrams(String[] sArr) {
 		List<List<String>> main = new LinkedList<>();
 		Map<String, List<String>> anagramMap = new HashMap<>();
 		for (String s : sArr) {
@@ -29,5 +29,10 @@ public class GroupAnagrams {
 			main.add(e.getValue());
 		}
 		return main;
+	}
+
+	public static void main(String[] args) {
+		String arr[] = { "inch", "cat", "chin", "kit", "act" };
+		System.out.println(groupAnagrams(arr));
 	}
 }

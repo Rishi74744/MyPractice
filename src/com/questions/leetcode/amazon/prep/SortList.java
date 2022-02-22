@@ -1,10 +1,10 @@
 package com.questions.leetcode.amazon.prep;
 
-import com.questions.leetcode.amazon.prep.MergeTwoSortedLists.ListNode;
+import java.util.PriorityQueue;
 
 public class SortList {
 
-	class ListNode {
+	static class ListNode {
 		int val;
 		ListNode next;
 
@@ -21,31 +21,22 @@ public class SortList {
 		}
 	}
 
-	public ListNode sortList(ListNode head) {
+	public static ListNode sortList(ListNode head) {
 		if (head.next == null) {
 			return head;
 		} else {
 			ListNode middle = findMiddle(head);
-			ListNode leftEnd = middle.next;
-			leftEnd.next = null;
+			ListNode rightList = middle.next;
+			middle.next = null;
 			ListNode left = sortList(head);
-			ListNode right = sortList(leftEnd);
+			ListNode right = sortList(rightList);
 			return merge(left, right);
 		}
 	}
 
-	public ListNode findMiddle(ListNode list) {
-		if (list == null) {
-			return null;
-		}
-		if (list.next == null) {
-			return list;
-		}
-		if (list.next.next == null) {
-			return list.next;
-		}
-		ListNode current = list;
-		ListNode ahead = list.next;
+	public static ListNode findMiddle(ListNode head) {
+		ListNode current = head;
+		ListNode ahead = head;
 		while (ahead != null && ahead.next != null && ahead.next.next != null) {
 			current = current.next;
 			ahead = ahead.next.next;
@@ -53,47 +44,42 @@ public class SortList {
 		return current;
 	}
 
-	public ListNode merge(ListNode list1, ListNode list2) {
-		if (list1 == null && list2 == null) {
-			return null;
-		}
-		if (list1 == null) {
-			return list2;
-		}
-		if (list2 == null) {
-			return list1;
-		}
-		ListNode merged = null;
-		ListNode prev = null;
-		while (list1 != null || list2 != null) {
-			int value = -101;
-			if (list1 != null && list2 != null) {
-				if (list1.val <= list2.val) {
-					value = list1.val;
-					list1 = list1.next;
-				} else {
-					value = list2.val;
-					list2 = list2.next;
-				}
+	public static ListNode merge(ListNode list1, ListNode list2) {
+		ListNode mainNode = new ListNode();
+		ListNode ahead = mainNode;
+		while (list1 != null && list2 != null) {
+			if (list1.val < list2.val) {
+				ahead.next = list1;
+				list1 = list1.next;
+				ahead = ahead.next;
 			} else {
-				if (list1 == null && list2 != null) {
-					value = list2.val;
-					list2 = list2.next;
-				}
-				if (list2 == null && list1 != null) {
-					value = list1.val;
-					list1 = list1.next;
-				}
+				ahead.next = list2;
+				list2 = list2.next;
+				ahead = ahead.next;
 			}
-			ListNode currentNode = new ListNode(value);
-			if (merged == null) {
-				merged = currentNode;
-			} else {
-				prev.next = currentNode;
-			}
-			prev = currentNode;
 		}
-		return merged;
+		ahead.next = list1 != null ? list1 : list2;
+		return mainNode.next;
+	}
+
+	public static void main(String[] args) {
+		ListNode head = null;
+		int arr[] = { 4, 2, 1, 3, -5, 8 };
+		ListNode prevNode = head;
+		for (int i = 0; i < arr.length; i++) {
+			if (i == 0) {
+				head = new ListNode(arr[i]);
+				prevNode = head;
+			} else {
+				ListNode nextNode = new ListNode(arr[i]);
+				prevNode.next = nextNode;
+				prevNode = nextNode;
+
+			}
+
+		}
+		ListNode node = sortList(head);
+		System.out.println(node.val);
 	}
 
 }

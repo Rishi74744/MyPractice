@@ -1,5 +1,8 @@
 package com.questions.leetcode.medium;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class FlattenBinaryTreeToLinkedList {
 
 	class TreeNode {
@@ -19,6 +22,11 @@ public class FlattenBinaryTreeToLinkedList {
 			this.left = left;
 			this.right = right;
 		}
+	}
+
+	public List<Integer> flatten(TreeNode root) {
+		List<Integer> preorderList = new ArrayList<>();
+		return preorderList;
 	}
 
 }
