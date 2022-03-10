@@ -1,0 +1,40 @@
+package com.java.prep.dp;
+
+/**
+ * Given a string s, return the longest pallindromic substring in s.
+ * 
+ * Example 1:
+ * 
+ * Input: s = "babad" Output: "bab" Explanation: "aba" is also a valid answer.
+ * 
+ * Example 2:
+ * 
+ * Input: s = "cbbd" Output: "bb"
+ * 
+ * 
+ * Constraints:
+ * 
+ * 1 <= s.length <= 1000
+ * 
+ * s consist of only digits and English letters.
+ *
+ */
+public class LongestPallindromicString {
+
+	public String longestPalindrome(String s) {
+		int j = s.length();
+		int max = 0;
+		for (int k = 0; k < s.length(); k++) {
+			int i = k;
+			while (i < j) {
+			}
+		}
+		return null;
+	}
+
+	public static void main(String[] args) {
+		LongestPallindromicString lps = new LongestPallindromicString();
+		System.out.println(lps.longestPalindrome("abbc"));
+	}
+
+}
