@@ -64,19 +64,17 @@ package com.java.prep.arrays;
  */
 public class RemoveDuplicatesFromSortedArray {
 
+	/**
+	 * Complexity - O(n), Space - O(1)
+	 */
 	public static int removeDuplicates(int[] nums) {
-		int k = 1;
-		int last = -101;
-		for (int i = 0; i < nums.length; i++) {
-			if (nums[i] != last) {
-				last = nums[i];
-				k++;
-			} else {
-				nums[i] = nums[i + 1];
-				i++;
+		int k = 0;
+		for (int i = 1; i < nums.length; i++) {
+			if (nums[i] != nums[i - 1]) {
+				nums[++k] = nums[i];
 			}
 		}
-		return k;
+		return k + 1;
 	}
 
 	public static void main(String[] args) {

@@ -44,8 +44,8 @@ public class SubArraySumEqualsK {
 
 	public static void main(String[] args) {
 		SubArraySumEqualsK s = new SubArraySumEqualsK();
-		int nums[] = { 1, 2, 2, 3, 2, 1 };
-		System.out.println(s.subarraySum(nums, 3));
+		int nums[] = { 3, 1, 2, 4, 5, 2, 3 };
+		System.out.println(s.subarraySum(nums, 4));
 	}
 
 }

@@ -97,7 +97,6 @@ public class JavaSample {
 	}
 
 	public static void main(String[] args) {
-
 		JavaSample j = new JavaSample();
 		j.addScore("a", 40);
 		j.addScore("d", 50);
