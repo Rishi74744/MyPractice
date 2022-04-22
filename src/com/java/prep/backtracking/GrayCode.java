@@ -53,6 +53,9 @@ import java.util.List;
  */
 public class GrayCode {
 
+	/**
+	 * Complexity - O(2^n), Space - O(1)
+	 */
 	public static List<Integer> grayCode(int n) {
 		List<Integer> result = new ArrayList<>();
 		result.add(0);

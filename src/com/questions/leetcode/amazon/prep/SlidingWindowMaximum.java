@@ -1,6 +1,72 @@
 package com.questions.leetcode.amazon.prep;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Stack;
+
 public class SlidingWindowMaximum {
+	public static int segment1(int x, List<Integer> space) {
+		int chunkNum = 1;
+		Stack<Integer> s = new Stack<>();
+		s.push(0);
+
+		for (int i = 1; i < space.size(); i++) {
+			if (i < x) {
+				if (space.get(i) < space.get(s.peek())) {
+					s.pop();
+					s.push(i);
+				}
+			} else {
+				var peek = s.peek();
+				if (peek >= chunkNum) {
+					s.push(space.get(i) < space.get(s.peek()) ? i : peek);
+				} else {
+					s.push(i);
+
+					var j = chunkNum;
+					var count = 0;
+					while (count++ < x) {
+						if (space.get(j) < space.get(s.peek())) {
+							s.pop();
+							s.push(j);
+						}
+						j++;
+					}
+				}
+				chunkNum++;
+			}
+		}
+
+		return s.stream().mapToInt(Integer::intValue).max().getAsInt();
+	}
+
+	public static int segment(int x, List<Integer> space) {
+		int n = space.size();
+		if (n == 1) {
+			return space.get(0);
+		}
+		int count = 0;
+		int min = Integer.MAX_VALUE;
+		int max = Integer.MIN_VALUE;
+		for (int i = 0; i < n; i++) {
+			if (count < x) {
+				min = Math.min(min, space.get(i));
+			} else {
+				max = Math.max(max, min);
+				if (space.get(i - count) == min) {
+					int idx = i - count + 1;
+					min = space.get(i - count + 1);
+					while (idx <= i) {
+						min = Math.min(min, space.get(idx));
+						idx++;
+					}
+				} else {
+					min = Math.min(min, space.get(i));
+				}
+			}
+		}
+		return max == Integer.MIN_VALUE ? min : max;
+	}
 
 	public static int[] maxSlidingWindow(int[] nums, int k) {
 		int n = nums.length;
@@ -45,6 +111,7 @@ public class SlidingWindowMaximum {
 		for (int i = 0; i < result.length; i++) {
 			System.out.println(result[i]);
 		}
+
 	}
 
 }
