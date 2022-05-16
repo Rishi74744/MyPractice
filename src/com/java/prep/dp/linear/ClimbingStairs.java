@@ -27,7 +27,11 @@ package com.java.prep.dp.linear;
 public class ClimbingStairs {
 
 	/**
-	 * Recurrence Relation - 1, if n==0 || n==1 f(n-1) + f(n-2), if n > 1
+	 * Recurrence Relation -
+	 * 
+	 * 1, if n==0 || n==1
+	 * 
+	 * f(n-1) + f(n-2), if n > 1
 	 * 
 	 * Complexity - O(n), Space - O(1)
 	 */

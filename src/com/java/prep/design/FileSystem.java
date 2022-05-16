@@ -1,6 +1,7 @@
 package com.java.prep.design;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -111,6 +112,12 @@ public class FileSystem {
 	private void createDirectory(String parentDirectory, String currentDirectory) {
 		List<Item> directoryItems = directoryMap.getOrDefault(parentDirectory, new ArrayList<>());
 		directoryItems.add(new Item(currentDirectory, "", ItemType.DIRECTORY));
+		directoryItems.sort(new Comparator<Item>() {
+			@Override
+			public int compare(Item o1, Item o2) {
+				return o1.getName().compareTo(o2.getName());
+			}
+		});
 		directoryMap.put(parentDirectory, directoryItems);
 		directoryMap.put(currentDirectory, new ArrayList<>());
 	}
@@ -193,16 +200,6 @@ public class FileSystem {
 		System.out.println(f.ls("/a/b/c/"));
 		f.addContentToFile("/a/b/c/d", "Hi This is a file with name d and it is modified");
 	}
-
-}
-
-class DirectoryHierarchy {
-
-	String name;
-	DirectoryHierarchy[] nextLevel;
-	ItemType itemType;
-	
-	
 
 }
 

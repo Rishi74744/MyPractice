@@ -1,9 +1,13 @@
 package com.java.prep.graph;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Queue;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * There are N courses, labelled from 1 to N.
@@ -38,53 +42,49 @@ import java.util.Set;
  */
 public class ParallelCourses {
 
+	/*
+	 * Using Topology - Complexity - O(V + E), Space - O(V + E)
+	 */
 	public int minimumSemesters(int n, int[][] relations) {
-		boolean visited[] = new boolean[n];
-		Set<Integer> st = new HashSet<>();
-		List<List<Integer>> adjList = prepareAdjList(n, relations);
-		topologicalSort(n, visited, adjList, st);
-		return 0;
+		int result = 0;
+		int[] preRequisites = new int[n];
+		List<List<Integer>> adjList = prepareAdjList(n, preRequisites, relations);
+		Queue<Integer> queue = IntStream.range(0, n).filter(index -> preRequisites[index] == 0).boxed()
+				.collect(Collectors.toCollection(ArrayDeque::new));
+		int count = 0;
+		while (!queue.isEmpty()) {
+			for (int index = queue.size(); index > 0; --index) {
+				int src = queue.poll();
+				count++;
+				for(int dest: adjList.get(src)) {
+					if(--preRequisites[dest] == 0) {
+						queue.offer(dest);
+					}
+				}
+			}
+			result++;
+		}
+		return count == n ? result : -1;
 	}
 
-	public List<List<Integer>> prepareAdjList(int n, int[][] relations) {
+	public List<List<Integer>> prepareAdjList(int n, int[] preRequisites, int[][] relations) {
 		List<List<Integer>> adjList = new ArrayList<>();
 		for (int i = 0; i < n; i++) {
 			adjList.add(new ArrayList<>());
 		}
 		for (int i = 0; i < relations.length; i++) {
 			adjList.get(relations[i][0] - 1).add(relations[i][1] - 1);
+			++preRequisites[relations[i][1] - 1];
 		}
 		return adjList;
 	}
 
-	public boolean topologicalSort(int n, boolean visited[], List<List<Integer>> adjList, Set<Integer> st) {
-		for (int i = 0; i < n; i++) {
-			if (!sort(i, visited, adjList, st)) {
-				return false;
-			}
-		}
-		return true;
-	}
-
-	public boolean sort(int source, boolean visited[], List<List<Integer>> adjList, Set<Integer> st) {
-		visited[source] = true;
-		st.add(source);
-		for (int node : adjList.get(source)) {
-			if (!visited[node]) {
-				if (!sort(node, visited, adjList, st)) {
-					return false;
-				}
-			}
-			if (visited[node] && st.contains(node)) {
-				return false;
-			}
-		}
-		st.remove(source);
-		return true;
-	}
 
 	public static void main(String[] args) {
-
+		ParallelCourses p = new ParallelCourses();
+		int rel[][] = { { 1, 3 }, { 2, 3 } };
+		int l = p.minimumSemesters(3, rel);
+		System.out.println(l);
 	}
 
 }
